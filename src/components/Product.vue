@@ -1,5 +1,6 @@
 <script setup>
 import { onWatcherCleanup, ref, watch, watchEffect } from 'vue';
+import ProductDetail from './ProductDetail.vue';
 
 const productId = ref('product1');
 const product = ref(null);
@@ -34,10 +35,15 @@ watchEffect(async (newVal, oldVal) => {
     </select>
   </label>
   <div v-if="product">
-    <h1>Product</h1>
+    <ProductDetail
+      :id="product.id"
+      :price="product.price"
+      :name="product.name"
+    />
+    <!-- <h1>Product</h1>
     <p>id : {{ product.id }}</p>
     <p>Name : {{ product.name }}</p>
-    <p>Price : {{ product.price }}</p>
+    <p>Price : {{ product.price }}</p> -->
   </div>
 </template>
 

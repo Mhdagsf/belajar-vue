@@ -1,13 +1,16 @@
 <script setup>
-import { nextTick, ref } from "vue";
-console.info("Load Component");
+import { nextTick, ref } from 'vue';
+
+const props = defineProps(['name', 'initialCount']);
+
+console.info('Load Component');
 let counter = ref({
-  count: 0,
-  name: "agis",
+  count: Number(props.initialCount),
+  name: 'agis',
 });
 
 async function increment() {
-  console.info("Increment counter: $(counter.value.count)");
+  console.info('Increment counter: $(counter.value.count)');
   counter.value = {
     name: counter.value.name,
     count: counter.value.count + 1,
@@ -19,12 +22,14 @@ async function increment() {
   counter.value.count++;
   await nextTick();
   counter.value.count++;
-  console.log("Increment count after nextTick");
+  console.log('Increment count after nextTick');
 }
 </script>
 
 <template>
-  <h1 id="count">Counter: {{ counter.name }} : {{ counter.count }}</h1>
+  <h1 id="count">
+    Counter: {{ props.name }} {{ counter.name }} : {{ counter.count }}
+  </h1>
   <button v-on:click="increment">Increment</button>
 </template>
 
